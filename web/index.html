@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#147d59">
+  <title>Waypoint | Delivery Operations</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/vendor/lucide.min.js" defer></script>
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="/" aria-label="Waypoint home"><span class="brand-mark"><i data-lucide="waypoints"></i></span>waypoint<span class="brand-dot">.</span></a>
+    <div class="workspace-label">OPERATIONS WORKSPACE</div>
+    <nav aria-label="Main navigation">
+      <button data-page="overview"><i data-lucide="layout-dashboard"></i><span>Overview</span></button>
+      <button data-page="dispatch" class="active"><i data-lucide="route"></i><span>Dispatch board</span><span class="nav-dot"></span></button>
+      <button data-page="exceptions"><i data-lucide="circle-alert"></i><span>Exceptions</span><span id="exception-count" class="nav-count">0</span></button>
+      <button data-page="fleet"><i data-lucide="truck"></i><span>Fleet & drivers</span></button>
+      <div class="nav-divider"></div>
+      <button data-page="quality"><i data-lucide="database"></i><span>Data & quality</span></button>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="environment"><span class="live-dot"></span> Synthetic environment</div>
+      <div class="side-run" id="side-run">Fixed-seed planning</div>
+      <div class="profile"><span class="avatar">OP</span><div><strong>Operations planner</strong><small>London distribution</small></div><i data-lucide="chevrons-up-down"></i></div>
+    </div>
+  </aside>
+  <div class="shell">
+    <header class="topbar"><div class="breadcrumb">Workspace <span>/</span> <strong id="crumb">Dispatch board</strong></div><div class="topbar-right"><span class="region"><i data-lucide="map-pin"></i> London, UK</span><span class="top-divider"></span><span class="status-dot"></span><span>Local workspace</span></div></header>
+    <main>
+      <section class="page-heading"><div><div class="eyebrow">LAST-MILE OPERATIONS</div><h1 id="page-title">Dispatch board</h1><p id="page-subtitle">Every delivery. A clear way forward.</p></div><div class="heading-actions"><a class="button secondary" href="/api/export"><i data-lucide="download"></i><span>Export bundle</span></a><button class="button primary" id="generate-button"><i data-lucide="sparkles"></i>Generate plan</button></div></section>
+      <section class="datebar"><div class="date-controls"><button class="icon-button" id="prev-day" aria-label="Previous day" title="Previous day"><i data-lucide="chevron-left"></i></button><label class="date-label"><i data-lucide="calendar-days"></i><input id="date-select" class="inline-select" type="date" min="0001-01-01" max="9999-12-31" required aria-label="Planning date"></label><button class="icon-button" id="next-day" aria-label="Next day" title="Next day"><i data-lucide="chevron-right"></i></button><span class="day-tag" id="day-tag">DAY 01</span></div><div class="traffic" id="traffic-label"></div></section>
+      <div id="content" aria-live="polite"><div class="loading-state"><span class="spinner"></span>Loading operations...</div></div>
+      <footer><span><span class="live-dot"></span> <span id="footer-run">Deterministic planning</span></span><span>WAYPOINT / OPERATIONS INTELLIGENCE</span></footer>
+    </main>
+  </div>
+  <dialog id="plan-dialog"><form id="plan-form"><div class="dialog-header"><div><span class="eyebrow">PLANNING WORKSPACE</span><h2>Generate delivery plan</h2></div><button type="button" class="icon-button" data-action="close-plan" aria-label="Close"><i data-lucide="x"></i></button></div>
+    <label class="field-label" for="scale-input">Operation scale</label><select id="scale-input"><option value="full">Full operation · 500 sites / 100 vehicles</option><option value="starter">Starter operation · 60 sites / 12 vehicles</option></select>
+    <label class="field-label" for="start-date-input">Start date</label><input id="start-date-input" type="date" min="0001-01-01" max="9999-12-31" required>
+    <label class="field-label" for="end-date-input">End date (inclusive)</label><input id="end-date-input" type="date" max="9999-12-31" required>
+    <div class="form-meta"><i data-lucide="calendar-range"></i><output id="planning-period-label" for="start-date-input end-date-input" aria-live="polite"></output></div>
+    <label class="field-label" for="seed-input">Generation seed</label><input id="seed-input" type="number" min="0" max="4294967295" required value="20261022"><div id="plan-error" class="form-error" role="alert"></div><button class="button primary full-width" type="submit" id="plan-submit"><i data-lucide="route"></i>Generate & validate</button></form></dialog>
+  <dialog id="detail-dialog"><div id="detail-content"></div></dialog>
+  <div id="toast" role="status" class="toast" hidden></div>
+</body>
+</html>
