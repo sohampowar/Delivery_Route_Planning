@@ -1,4 +1,4 @@
-# Waypoint Delivery Planning
+# Delivery Route Planning
 
 A working, local-first delivery operations application with a browser dashboard, Google OR-Tools routing, SQLite persistence, deterministic synthetic datasets, independent validation, and portable exports. Python 3.10+ is required; the verified environment is Windows / Python 3.10.5 / OR-Tools 9.14.6206. No API keys, map accounts, Node build, or external data services are needed.
 
